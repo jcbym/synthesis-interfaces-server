@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const https = require("http");
-const formidable = require("formidable");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
