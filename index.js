@@ -5,10 +5,10 @@ const https = require("http");
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
 
-const PORT = 443;
-const DATA_DIR_ENV_VAR = "BACKEND_DATA";
-const FULLCHAIN_PATH_ENV_VAR = "BACKEND_FULLCHAIN";
-const PRIVKEY_PATH_ENV_VAR = "BACKEND_PRIVKEY";
+const PORT = 80;
+const DATA_DIR_ENV_VAR = "SYNTH_MOD_BACKEND_DATA";
+const FULLCHAIN_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_FULLCHAIN";
+const PRIVKEY_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_PRIVKEY";
 
 const DATA_DIR = process.env[DATA_DIR_ENV_VAR];
 const FULLCHAIN_PATH = process.env[FULLCHAIN_PATH_ENV_VAR];
@@ -270,7 +270,7 @@ function listener(req, res) {
 ////////////////////////////////////////////////////////////////////////////////
 // Main
 
-logInfo("--- Starting up Edit Mirror backend server ---");
+logInfo("--- Starting up Synthesis Modifiability backend server ---");
 
 // Startup checks - environment variables
 
