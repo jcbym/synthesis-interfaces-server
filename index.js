@@ -1,11 +1,11 @@
 const fs = require("fs");
 const path = require("path");
-const https = require("http");
+const https = require("https");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
 
-const PORT = 80;
+const PORT = 443;
 const DATA_DIR_ENV_VAR = "SYNTH_MOD_BACKEND_DATA";
 const FULLCHAIN_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_FULLCHAIN";
 const PRIVKEY_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_PRIVKEY";
