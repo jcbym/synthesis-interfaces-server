@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
+const https = require("http");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
@@ -86,6 +86,7 @@ function parseUrl(url) {
 
 function store(
   serverTimestamp,
+  userID,
   body,
   callback
 ) {
@@ -106,10 +107,9 @@ function store(
         return callback({ code: 500, content: err });
       }
 
-      const uniqueSuffix = "1234";
       fs.writeFile(
         `${DATA_DIR}/`
-          + `${serverTimestamp}-${uniqueSuffix}.json`,
+          + `${serverTimestamp}-${userID}.json`,
         body,
         err => {
           if (err) {
@@ -208,11 +208,11 @@ function handlePost(req, res) {
       });
       req.on('end', () => {
           // DO STUFF WITH body VARIABLE HERE
-          // data = JSON.parse(body);
-          // console.log(data)
+          data = JSON.parse(body);
+          userID = data['userID'];
           // etc
           // res.end('ok');
-        store(serverTimestamp, body, err => {
+        store(serverTimestamp, userID, body, err => {
           if (err) {
             respond(res, err.code, err.content);
           } else {
