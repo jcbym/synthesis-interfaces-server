@@ -7,12 +7,12 @@ const https = require("http");
 
 const PORT = 443;
 const DATA_DIR_ENV_VAR = "SYNTH_MOD_BACKEND_DATA";
-const FULLCHAIN_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_FULLCHAIN";
-const PRIVKEY_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_PRIVKEY";
+const KEY_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_KEY";
+const CERT_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_CERT";
 
 const DATA_DIR = process.env[DATA_DIR_ENV_VAR];
-const FULLCHAIN_PATH = process.env[FULLCHAIN_PATH_ENV_VAR];
-const PRIVKEY_PATH = process.env[PRIVKEY_PATH_ENV_VAR];
+const CERT_PATH = process.env[CERT_PATH_ENV_VAR];
+const KEY_PATH = process.env[KEY_PATH_ENV_VAR];
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helpers
@@ -279,13 +279,13 @@ if (!DATA_DIR) {
   process.exit(1);
 }
 
-if (!FULLCHAIN_PATH) {
-  logError(`${FULLCHAIN_PATH_ENV_VAR} environment variable not set`);
+if (!CERT_PATH) {
+  logError(`${CERT_PATH_ENV_VAR} environment variable not set`);
   process.exit(1);
 }
 
-if (!PRIVKEY_PATH) {
-  logError(`${PRIVKEY_PATH_ENV_VAR} environment variable not set`);
+if (!KEY_PATH) {
+  logError(`${KEY_PATH_ENV_VAR} environment variable not set`);
   process.exit(1);
 }
 
@@ -296,13 +296,13 @@ if (!fs.existsSync(DATA_DIR)) {
   process.exit(1);
 }
 
-if (!fs.existsSync(FULLCHAIN_PATH)) {
-  logError(`Fullchain path '${FULLCHAIN_PATH}' does not exist`);
+if (!fs.existsSync(CERT_PATH)) {
+  logError(`Cert path '${CERT_PATH}' does not exist`);
   process.exit(1);
 }
 
-if (!fs.existsSync(PRIVKEY_PATH)) {
-  logError(`Privkey path '${PRIVKEY_PATH}' does not exist`);
+if (!fs.existsSync(KEY_PATH)) {
+  logError(`Key path '${KEY_PATH}' does not exist`);
   process.exit(1);
 }
 
@@ -310,8 +310,8 @@ if (!fs.existsSync(PRIVKEY_PATH)) {
 
 const server = https.createServer(
   {
-    key: fs.readFileSync(PRIVKEY_PATH),
-    cert: fs.readFileSync(FULLCHAIN_PATH)
+    cert: fs.readFileSync(CERT_PATH),
+    key: fs.readFileSync(KEY_PATH),
   },
  listener);
 
