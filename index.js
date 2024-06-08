@@ -1,18 +1,14 @@
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
+const http = require("http");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
 
-const PORT = 443;
+const PORT = 8000;
 const DATA_DIR_ENV_VAR = "SYNTH_MOD_BACKEND_DATA";
-const KEY_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_KEY";
-const CERT_PATH_ENV_VAR = "SYNTH_MOD_BACKEND_CERT";
 
 const DATA_DIR = process.env[DATA_DIR_ENV_VAR];
-const CERT_PATH = process.env[CERT_PATH_ENV_VAR];
-const KEY_PATH = process.env[KEY_PATH_ENV_VAR];
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helpers
@@ -279,15 +275,15 @@ if (!DATA_DIR) {
   process.exit(1);
 }
 
-if (!CERT_PATH) {
-  logError(`${CERT_PATH_ENV_VAR} environment variable not set`);
-  process.exit(1);
-}
+// if (!CERT_PATH) {
+//   logError(`${CERT_PATH_ENV_VAR} environment variable not set`);
+//   process.exit(1);
+// }
 
-if (!KEY_PATH) {
-  logError(`${KEY_PATH_ENV_VAR} environment variable not set`);
-  process.exit(1);
-}
+// if (!KEY_PATH) {
+//   logError(`${KEY_PATH_ENV_VAR} environment variable not set`);
+//   process.exit(1);
+// }
 
 // Startup checks - files exist
 
@@ -296,23 +292,23 @@ if (!fs.existsSync(DATA_DIR)) {
   process.exit(1);
 }
 
-if (!fs.existsSync(CERT_PATH)) {
-  logError(`Cert path '${CERT_PATH}' does not exist`);
-  process.exit(1);
-}
+// if (!fs.existsSync(CERT_PATH)) {
+//   logError(`Cert path '${CERT_PATH}' does not exist`);
+//   process.exit(1);
+// }
 
-if (!fs.existsSync(KEY_PATH)) {
-  logError(`Key path '${KEY_PATH}' does not exist`);
-  process.exit(1);
-}
+// if (!fs.existsSync(KEY_PATH)) {
+//   logError(`Key path '${KEY_PATH}' does not exist`);
+//   process.exit(1);
+// }
 
 // Server loop
 
-const server = https.createServer(
-  {
-    cert: fs.readFileSync(CERT_PATH),
-    key: fs.readFileSync(KEY_PATH),
-  },
+const server = http.createServer(
+  // {
+  //   cert: fs.readFileSync(CERT_PATH),
+  //   key: fs.readFileSync(KEY_PATH),
+  // },
  listener);
 
 server.on("clientError", (err, socket) => {
