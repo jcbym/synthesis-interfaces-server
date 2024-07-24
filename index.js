@@ -6,7 +6,7 @@ const http = require("http");
 // Constants
 
 const PORT = 8000;
-const DATA_DIR_ENV_VAR = "SYNTH_MOD_BACKEND_DATA";
+const DATA_DIR_ENV_VAR = "BACKEND_DATA";
 
 const DATA_DIR = process.env[DATA_DIR_ENV_VAR];
 
@@ -97,6 +97,13 @@ function store(
     //    content: `Forbidden user id '${userId}'`
     //  });
     //}
+
+    if (userID == 28) {
+      return callback({
+        code: 400,
+        content: `Forbidden user id '${userID}'`
+      });
+    }
 
     fs.mkdir(`${DATA_DIR}`, { recursive: true }, err => {
       if (err) {
